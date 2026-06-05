@@ -104,20 +104,13 @@
 \end{onehalfzspacing}
 
 \datedsubsection{\textbf{北京逐风科技有限公司} · 北京}{2016年4月 -- 2025年9月}
-\role{首席工程师 / 实时数据采集平台负责人}{Kotlin · Vert.x · Netty · Kafka · Oracle Redo Log}
+\role{首席工程师}{Java · Kotlin · Vert.x · Netty · Kafka · Flink · Oracle Redo Log · Connector Runtime}
 \begin{onehalfzspacing}
-独立负责高性能 Oracle 增量数据采集代理从 0 到 1 的设计、实现与长期运维，\url{https://datapipelineinc.github.io/dp-oracle-agent/}
+独立负责高性能 Oracle 增量数据采集代理从 0 到 1 的设计实现与长期运维（\url{https://datapipelineinc.github.io/dp-oracle-agent/}）；主导从 0 到 1 搭建数据融合平台核心架构（\url{https://datapipeline.com}）。
 \begin{itemize}
   \item \textbf{日志解析引擎核心设计}：基于 Oracle Redo Log 实现增量数据采集，最高解析速度达 400 MB/s；采用 Vert.x + Kotlin Coroutine + Netty 构建高并发异步处理架构，为公司核心资产。
   \item \textbf{稳定性与可观测性体系}：集成事务磁盘缓存、自定义序列化、自动重连、错误数据 dump、Metrics 监控与 Alert 预警，保障采集链路端到端稳定性。
   \item \textbf{运维工具链建设}：开发基于 JLine 的交互式命令行辅助工具与远程文件读取代理服务，结合热加载配置与多并发控制，降低线上运维复杂度。
-\end{itemize}
-\end{onehalfzspacing}
-
-\role{首席工程师 / 数据融合平台核心研发}{Java · Kafka · Flink · Go · Connector Runtime}
-\begin{onehalfzspacing}
-主导从 0 到 1 搭建数据融合平台核心架构，\url{https://datapipeline.com}
-\begin{itemize}
   \item \textbf{连接器框架抽象设计}：设计数据源与目的地连接器核心框架层，规范工作线程调度、内存池管理、批量读写及连接池配置；各连接器实现仅需构建类型映射与值转换逻辑，兼容中间件与内存通道，快速支撑 MySQL、Postgres、Oracle 等多源接入。
   \item \textbf{Kafka 增量重平衡机制}：基于 Kafka Consumer Rebalance Protocol 改造核心重平衡代码，先于社区实现增量重平衡，支持 1000+ 并发任务稳定运行。
   \item \textbf{平台核心机制建设}：设计并实现预警、实时监控、多表批处理协调控制、自定义代码热加载、类加载隔离、差异数据补数、表级读写状态热控制等核心机制。
