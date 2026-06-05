@@ -9,7 +9,7 @@
 
 %% ---- Chinese support via standard XeLaTeX package ----
 \usepackage{xeCJK}
-\setCJKmainfont{PingFang SC}        % pre-installed on macOS
+\setCJKmainfont{Microsoft YaHei}    % pre-installed on Windows
 % \setCJKmainfont{STSong}           % alternative macOS font
 % \setCJKmainfont{Noto Serif CJK SC} % cross-platform free font
 
@@ -79,6 +79,9 @@
   \phone{(+86) 180-175-45245}
 }
 
+\section{\faUser\ 概要}
+专注后端与数据平台研发，具备实时数据采集、数据集成平台、自研 Connector/Runtime、分布式任务调度和数据链路稳定性治理经验。熟悉 Java/Kotlin/Go、Kafka、Flink、Spark、Iceberg、StarRocks 等技术栈，关注系统吞吐、稳定性、可观测性与工程架构抽象。
+
 \section{\faGraduationCap\ 教育}
 \datedsubsection{\textbf{上海交通大学}, 上海}{2008 -- 2012}
 \textit{学士}\ 电子信息与工程
@@ -88,20 +91,20 @@
 
 \section{\faUsers\ 工作经历}
 \datedsubsection{\textbf{马上消费金融科技（重庆）有限公司} 重庆}{2025年10月 -- 2026年3月}
-\role{高级大数据架构师}{Apache Seatunnel / Flink / Spark · Iceberg · StarRocks · HDFS · Kyuubi · JDBC}
+\role{高级大数据架构师}{Apache SeaTunnel / Flink / Spark · Iceberg · StarRocks · HDFS · Kyuubi · JDBC}
 \begin{onehalfzspacing}
-主导数据集成平台（DIDSP）架构升级，负责核心模块设计与关键缺陷治理。
+主导 DIDSP 数据集成平台核心链路架构升级，围绕多源入仓、任务执行、连接器优化、并发控制与稳定性治理，负责关键模块设计、性能优化和线上缺陷修复。
 \begin{itemize}
   \item \textbf{分库分表合并任务有状态化改造}：设计物理表级状态管理方案，引入分片状态表与精细化状态机，解决合并任务后观测粒度丢失与重跑成本高的问题，支持断点续传与单表级重试，显著提升运维效率与任务稳定性。
   \item \textbf{统一入仓链路架构设计}：制定 MySQL/TiDB、FTP/OSS、StarRocks 等多源数据至 Iceberg 的统一入仓规范，整合冗余组件，形成标准化、可扩展的数据集成架构。
   \item \textbf{核心连接器深度优化}：重构 JDBC 分片机制，优化大表并发抽取策略；扩展 StarRocks 连接器以支持复杂数据类型；设计文件系统连接器配置模型，增强多格式文件读取能力。
-  \item \textbf{引擎层与稳定性治理}：深入 Seatunnel Spark Translation 层支撑执行计划优化；实现 Flink 作业动态配置加载与敏感信息脱敏；修复 Kyuubi 提交重试、HDFS 重复写入、文本分隔符转义等关键缺陷，保障端到端数据一致性。
+  \item \textbf{引擎层与稳定性治理}：深入 SeaTunnel Spark Translation 层支撑执行计划优化；实现 Flink 作业动态配置加载与敏感信息脱敏；修复 Kyuubi 提交重试、HDFS 重复写入、文本分隔符转义等关键缺陷，保障端到端数据一致性。
   \item \textbf{并发控制与资源调度优化}：设计多数据源精细化并发控制方案，支持任务级集群并发度配置，提升资源利用率与吞吐效率。
 \end{itemize}
 \end{onehalfzspacing}
 
 \datedsubsection{\textbf{北京逐风科技有限公司} 北京}{2021年4月 -- 2025年9月}
-\role{后端工程师}{Kotlin · Vert.x · Netty · Kafka · K8s}
+\role{高级后端工程师 / 实时数据采集平台负责人}{Kotlin · Vert.x · Netty · Kafka · Oracle Redo Log}
 \begin{onehalfzspacing}
 独立负责高性能 Oracle 增量数据采集代理从 0 到 1 的设计、实现与长期运维，\url{https://datapipelineinc.github.io/dp-oracle-agent/}
 \begin{itemize}
@@ -112,14 +115,14 @@
 \end{onehalfzspacing}
 
 \datedsubsection{\textbf{北京逐风科技有限公司} 北京}{2016年4月 -- 2021年3月}
-\role{后端工程师}{Java · Flink · Kafka · Go · K8s}
+\role{高级后端工程师 / 数据融合平台核心研发}{Java · Kafka · Flink · Go · Connector Runtime}
 \begin{onehalfzspacing}
 主导从 0 到 1 搭建数据融合平台核心架构，\url{https://datapipeline.com}
 \begin{itemize}
   \item \textbf{连接器框架抽象设计}：设计数据源与目的地连接器核心框架层，规范工作线程调度、内存池管理、批量读写及连接池配置；各连接器实现仅需构建类型映射与值转换逻辑，兼容中间件与内存通道，快速支撑 MySQL、Postgres、Oracle 等多源接入。
   \item \textbf{Kafka 增量重平衡机制}：基于 Kafka Consumer Rebalance Protocol 改造核心重平衡代码，先于社区实现增量重平衡，支持 1000+ 并发任务稳定运行。
   \item \textbf{平台核心机制建设}：设计并实现预警、实时监控、多表批处理协调控制、自定义代码热加载、类加载隔离、差异数据补数、表级读写状态热控制等核心机制。
-  \item \textbf{Flink 连接器框架与弹性调度}：独立开发适配 Flink 运行时的连接器框架；使用 Go 开发自定义 K8s Operator，实现工作容器资源组动态扩缩容。
+  \item \textbf{自研 Connector 与 Runtime 架构}：设计并实现面向异构数据源的数据连接器框架与自研运行时，统一任务生命周期、线程调度、批量读写、状态控制和错误处理机制；支持后续对 Flink 等执行环境的适配，提升平台扩展性与工程复用能力。
 \end{itemize}
 \end{onehalfzspacing}
 
@@ -151,9 +154,11 @@
 
 \section{\faCogs\ 技能}
 \begin{itemize}[parsep=0.5ex]
-  \item \textbf{编程语言}: Java / Kotlin $\gg$ Go / Python
-  \item \textbf{大数据框架}: Apache Flink / Spark / Seatunnel · Kafka · Iceberg · StarRocks · HDFS
-  \item \textbf{后端框架}: Vert.x / Netty · Spring Boot · Kyuubi
+  \item \textbf{编程语言}: Java、Kotlin（熟练），Go、Python（项目经验）
+  \item \textbf{数据集成}: CDC / Connector Framework / Runtime / 数据同步 / 数据一致性
+  \item \textbf{大数据组件}: Apache Flink / Spark / SeaTunnel · Kafka · Iceberg · StarRocks · HDFS · Kyuubi
+  \item \textbf{后端与网络}: Vert.x / Netty / Spring Boot
+  \item \textbf{稳定性与可观测性}: Metrics / Alert / 自动重连 / 错误数据 dump / 任务重试
   \item \textbf{基础设施}: Kubernetes · Docker · CI/CD
   \item \textbf{数据库}: MySQL / Oracle / TiDB / Postgres
   \item \textbf{语言}: 英语（熟练）
