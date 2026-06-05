@@ -1,0 +1,162 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[a4paper, 11pt]{article}
+
+%% ---- Page layout ----
+\usepackage{geometry}
+\geometry{left=1.8cm, right=1.8cm, top=1.8cm, bottom=1.8cm}
+
+%% ---- Chinese support via standard XeLaTeX package ----
+\usepackage{xeCJK}
+\setCJKmainfont{PingFang SC}        % pre-installed on macOS
+% \setCJKmainfont{STSong}           % alternative macOS font
+% \setCJKmainfont{Noto Serif CJK SC} % cross-platform free font
+
+%% ---- Icons (replaces FontAwesome from resume.cls) ----
+\usepackage{fontawesome5}
+
+%% ---- Section formatting ----
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+%% ---- List customization ----
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=2pt, partopsep=0pt}
+
+%% ---- Line spacing ----
+\usepackage{setspace}
+
+%% ---- Hyperlinks ----
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=black}
+
+%% ---- Spacing ----
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+%% ================================================================
+%% Custom commands — replacing resume.cls and linespacing_fix.sty
+%% ================================================================
+
+% \name{full name}
+\newcommand{\name}[1]{%
+  \begin{center}{\LARGE\bfseries #1}\end{center}\vspace{-4pt}%
+}
+
+% \basicInfo{contact items}
+\newcommand{\basicInfo}[1]{%
+  \begin{center}\small #1\end{center}\vspace{2pt}%
+}
+
+% \email{address}  \phone{number}
+\newcommand{\email}[1]{\faEnvelope~\href{mailto:#1}{#1}}
+\newcommand{\phone}[1]{\faPhone~#1}
+
+% \datedsubsection{title}{date range}
+\newcommand{\datedsubsection}[2]{%
+  \vspace{4pt}\noindent\textbf{#1}\hfill\textit{#2}\par\vspace{1pt}%
+}
+
+% \role{position title}{tech stack}
+\newcommand{\role}[2]{%
+  \noindent\textit{#1}\enspace\texttt{#2}\par%
+}
+
+% onehalfzspacing environment (replaces linespacing_fix + custom env)
+\newenvironment{onehalfzspacing}{\begin{spacing}{1.35}}{\end{spacing}}
+
+%% ================================================================
+
+\begin{document}
+\pagestyle{empty}
+
+\name{王绍}
+
+\basicInfo{
+  \email{wangshaono1@gmail.com} \textperiodcentered\
+  \phone{(+86) 180-175-45245}
+}
+
+\section{\faGraduationCap\ 教育}
+\datedsubsection{\textbf{上海交通大学}, 上海}{2008 -- 2012}
+\textit{学士}\ 电子信息与工程
+
+\datedsubsection{\textbf{密西根大学}, 美国，安娜堡}{2010 -- 2012}
+\textit{学士}\ 电气信息
+
+\section{\faUsers\ 工作经历}
+\datedsubsection{\textbf{马上消费金融科技（重庆）有限公司} 重庆}{2025年10月 -- 2026年3月}
+\role{高级大数据架构师}{Apache Seatunnel / Flink / Spark · Iceberg · StarRocks · HDFS · Kyuubi · JDBC}
+\begin{onehalfzspacing}
+主导数据集成平台（DIDSP）架构升级，负责核心模块设计与关键缺陷治理。
+\begin{itemize}
+  \item \textbf{分库分表合并任务有状态化改造}：设计物理表级状态管理方案，引入分片状态表与精细化状态机，解决合并任务后观测粒度丢失与重跑成本高的问题，支持断点续传与单表级重试，显著提升运维效率与任务稳定性。
+  \item \textbf{统一入仓链路架构设计}：制定 MySQL/TiDB、FTP/OSS、StarRocks 等多源数据至 Iceberg 的统一入仓规范，整合冗余组件，形成标准化、可扩展的数据集成架构。
+  \item \textbf{核心连接器深度优化}：重构 JDBC 分片机制，优化大表并发抽取策略；扩展 StarRocks 连接器以支持复杂数据类型；设计文件系统连接器配置模型，增强多格式文件读取能力。
+  \item \textbf{引擎层与稳定性治理}：深入 Seatunnel Spark Translation 层支撑执行计划优化；实现 Flink 作业动态配置加载与敏感信息脱敏；修复 Kyuubi 提交重试、HDFS 重复写入、文本分隔符转义等关键缺陷，保障端到端数据一致性。
+  \item \textbf{并发控制与资源调度优化}：设计多数据源精细化并发控制方案，支持任务级集群并发度配置，提升资源利用率与吞吐效率。
+\end{itemize}
+\end{onehalfzspacing}
+
+\datedsubsection{\textbf{北京逐风科技有限公司} 北京}{2021年4月 -- 2025年9月}
+\role{后端工程师}{Kotlin · Vert.x · Netty · Kafka · K8s}
+\begin{onehalfzspacing}
+独立负责高性能 Oracle 增量数据采集代理从 0 到 1 的设计、实现与长期运维，\url{https://datapipelineinc.github.io/dp-oracle-agent/}
+\begin{itemize}
+  \item \textbf{日志解析引擎核心设计}：基于 Oracle Redo Log 实现增量数据采集，最高解析速度达 400 MB/s；采用 Vert.x + Kotlin Coroutine + Netty 构建高并发异步处理架构，为公司核心资产。
+  \item \textbf{稳定性与可观测性体系}：集成事务磁盘缓存、自定义序列化、自动重连、错误数据 dump、Metrics 监控与 Alert 预警，保障采集链路端到端稳定性。
+  \item \textbf{运维工具链建设}：开发基于 JLine 的交互式命令行辅助工具与远程文件读取代理服务，结合热加载配置与多并发控制，降低线上运维复杂度。
+\end{itemize}
+\end{onehalfzspacing}
+
+\datedsubsection{\textbf{北京逐风科技有限公司} 北京}{2016年4月 -- 2021年3月}
+\role{后端工程师}{Java · Flink · Kafka · Go · K8s}
+\begin{onehalfzspacing}
+主导从 0 到 1 搭建数据融合平台核心架构，\url{https://datapipeline.com}
+\begin{itemize}
+  \item \textbf{连接器框架抽象设计}：设计数据源与目的地连接器核心框架层，规范工作线程调度、内存池管理、批量读写及连接池配置；各连接器实现仅需构建类型映射与值转换逻辑，兼容中间件与内存通道，快速支撑 MySQL、Postgres、Oracle 等多源接入。
+  \item \textbf{Kafka 增量重平衡机制}：基于 Kafka Consumer Rebalance Protocol 改造核心重平衡代码，先于社区实现增量重平衡，支持 1000+ 并发任务稳定运行。
+  \item \textbf{平台核心机制建设}：设计并实现预警、实时监控、多表批处理协调控制、自定义代码热加载、类加载隔离、差异数据补数、表级读写状态热控制等核心机制。
+  \item \textbf{Flink 连接器框架与弹性调度}：独立开发适配 Flink 运行时的连接器框架；使用 Go 开发自定义 K8s Operator，实现工作容器资源组动态扩缩容。
+\end{itemize}
+\end{onehalfzspacing}
+
+\datedsubsection{\textbf{普华永道信息技术(上海)有限公司} 上海}{2015年12月 -- 2016年4月}
+\role{移动应用开发工程师}{Java · Android}
+\begin{onehalfzspacing}
+\begin{itemize}
+  \item \textbf{Salesforce 移动端集成}：负责 Android 客户端页面开发及前后端 API 对接。
+\end{itemize}
+\end{onehalfzspacing}
+
+\datedsubsection{\textbf{Kaiser Permanente} 美国}{2014年8月 -- 2015年8月}
+\role{移动应用开发工程师}{Java · Android}
+\begin{onehalfzspacing}
+负责医疗健康 Android 应用功能开发，\url{https://www.kaiserpermanente.org}
+\begin{itemize}
+  \item \textbf{消息推送与邮件系统}：基于 Google GMS 实现客户端推送服务；实现应用内邮件系统的附件上传下载、预览及侧边栏功能。
+  \item \textbf{诊断信息可视化}：实现用户历史诊断信息展示面板，支持缩放与拖拽交互。
+\end{itemize}
+\end{onehalfzspacing}
+
+\datedsubsection{\textbf{2RedBeans} 美国}{2013年9月 -- 2014年2月}
+\role{前端开发工程师}{JavaScript · jQuery Mobile · Ruby on Rails}
+\begin{onehalfzspacing}
+\begin{itemize}
+  \item \textbf{移动端 Web 适配}：基于 jQuery Mobile 适配 Ruby on Rails 后端，实现滚动翻页、横向图库浏览等移动手势特有交互。
+\end{itemize}
+\end{onehalfzspacing}
+
+\section{\faCogs\ 技能}
+\begin{itemize}[parsep=0.5ex]
+  \item \textbf{编程语言}: Java / Kotlin $\gg$ Go / Python
+  \item \textbf{大数据框架}: Apache Flink / Spark / Seatunnel · Kafka · Iceberg · StarRocks · HDFS
+  \item \textbf{后端框架}: Vert.x / Netty · Spring Boot · Kyuubi
+  \item \textbf{基础设施}: Kubernetes · Docker · CI/CD
+  \item \textbf{数据库}: MySQL / Oracle / TiDB / Postgres
+  \item \textbf{语言}: 英语（熟练）
+\end{itemize}
+
+\end{document}
